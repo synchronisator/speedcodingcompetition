@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:speedcodingcompetition/layout/medium_layout.dart';
+import 'package:speedcodingcompetition/layout/narrow_layout.dart';
+import 'package:speedcodingcompetition/layout/wide_layout.dart';
+import 'package:speedcodingcompetition/provider/dataprovider.dart';
+import 'package:speedcodingcompetition/provider/loginprovider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (BuildContext context) => LoginProvider()),
+    ChangeNotifierProvider(create: (BuildContext context) => DataProvider()),
+      ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -10,58 +20,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Speedcoding Competition',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MainPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class MainPage extends StatelessWidget {
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
+    Size size = MediaQuery.of(context).size;
+    if (size.width <= 478) {
+      return const NarrowLayout(); // < 478px Mobile
+    } else if (size.width <= 991) {
+      return const MediumLayout(); // < 991px Tablet portrait
+    } else {
+      // >= 992 Everything else
+      return const WideLayout();
+    }
   }
 }
