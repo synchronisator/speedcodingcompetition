@@ -15,7 +15,7 @@ class DataProvider extends ChangeNotifier {
   static final rng = Random();
 
   DateTime vonDate = DateTime.now();
-  DateTime bisDate = DateTime.now().add(const Duration(days: 3));
+  DateTime bisDate = DateTime.now().add(const Duration(days: 30));
   final List<Rule> rulesForCompetition = [];
 
   DataProvider(){
