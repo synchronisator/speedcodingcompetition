@@ -54,7 +54,7 @@ class NarrowLayout extends StatelessWidget {
       body: Center(
         child: Row(
           children: [
-            const Expanded(
+            Expanded(
               child: RuleList(),
             ),
           ],

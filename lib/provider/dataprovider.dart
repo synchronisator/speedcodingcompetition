@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:speedcodingcompetition/data/competition.dart';
 import 'package:speedcodingcompetition/data/player.dart';
@@ -9,8 +11,62 @@ class DataProvider extends ChangeNotifier {
   List<Player> player = [];
   List<Competition> competition = [];
 
+  // new Competition
+  static final rng = Random();
+
+  DateTime vonDate = DateTime.now();
+  DateTime bisDate = DateTime.now().add(const Duration(days: 3));
+  final List<Rule> rulesForCompetition = [];
+
   DataProvider(){
     initFakeData();
+    initNewCompetitionData();
+  }
+
+  void setVonDate(DateTime? date){
+    if(date != null){
+      vonDate = date;
+      notifyListeners();
+    }
+  }
+
+  void setBisDate(DateTime? date){
+    if(date != null){
+      bisDate = date;
+      notifyListeners();
+    }
+  }
+
+  void addRule() {
+    if(rules.length == rulesForCompetition.length) return;
+    Rule r = rules[rng.nextInt(rules.length)];
+    if (!rulesForCompetition.contains(r)) {
+        rulesForCompetition.add(r);
+        notifyListeners();
+    } else {
+      addRule();
+    }
+  }
+
+  void changeRule(int index) {
+    if(rules.length == rulesForCompetition.length) return;
+    Rule r = rules[rng.nextInt(rules.length)];
+    if (!rulesForCompetition.contains(r)) {
+        rulesForCompetition.removeAt(index);
+        rulesForCompetition.insert(index, r);
+        notifyListeners();
+    } else {
+      changeRule(index);
+    }
+  }
+
+  void initNewCompetitionData() {
+    while(rulesForCompetition.length < 5){
+      Rule r = rules[rng.nextInt(rules.length)];
+      if(!rulesForCompetition.contains(r)){
+        rulesForCompetition.add(r);
+      }
+    }
   }
 
   void initFakeData() {
@@ -38,6 +94,10 @@ class DataProvider extends ChangeNotifier {
     rules.add(Rule(uuid.v4(), "Timer", description: ""));
     rules.add(Rule(uuid.v4(), "Collectables", description: ""));
     rules.add(Rule(uuid.v4(), "Hidden Feature", description: ""));
+    rules.add(Rule(uuid.v4(), "Sfx", description: ""));
+    rules.add(Rule(uuid.v4(), "Hintergrundmusik", description: ""));
+    rules.add(Rule(uuid.v4(), "Gradient", description: ""));
+    rules.add(Rule(uuid.v4(), "Clipborder", description: ""));
 
     player.add(Player(uuid.v4(), "Hans", "der Glückliche", []));
     player.add(Player(uuid.v4(), "Marie", "die Strahlende", []));

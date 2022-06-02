@@ -44,12 +44,7 @@ class MediumLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const Expanded(
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Center(child: RuleList()),
-              ),
-            ),
+            Expanded(flex: 1, child: RuleList()),
             Container(
               constraints: const BoxConstraints(minWidth: 0, maxWidth: 250),
               child: const Padding(

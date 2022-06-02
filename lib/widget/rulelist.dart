@@ -1,25 +1,36 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 
 class RuleList extends StatelessWidget {
-  const RuleList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: context.read<DataProvider>().rules.length,
-        itemBuilder: (context, index) {
-          Rule r = context.read<DataProvider>().rules[index];
-          return Card(
-            color: Colors.blue,
-            child: ListTile(
-              title: Text(r.text),
-              subtitle: Text(r.description),
+      shrinkWrap: true,
+      itemCount: context.watch<DataProvider>().rulesForCompetition.length + 1,
+      itemBuilder: (context, index) {
+        if (index == context.read<DataProvider>().rulesForCompetition.length) {
+          return context.read<DataProvider>().rulesForCompetition.length == context.read<DataProvider>().rules.length
+           ? const SizedBox.shrink()
+           : Center(
+              child: IconButton(icon: Icon(Icons.add), onPressed: context.read<DataProvider>().addRule));
+        }
+        Rule r = context.read<DataProvider>().rulesForCompetition[index];
+        return Card(
+          child: ListTile(
+            title: Text(r.text),
+            subtitle: Text(r.description),
+            trailing: IconButton(
+              onPressed: () => context.read<DataProvider>().changeRule(index), icon: Icon(Icons.refresh),
             ),
-          );
-        },
+          ),
+        );
+      },
     );
   }
+
 }

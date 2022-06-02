@@ -23,6 +23,23 @@ class MyApp extends StatelessWidget {
       title: 'Speedcoding Competition',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.black12,
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 2,
+          titleTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black, fontSize: 30,  fontFamily: ""),
+          toolbarTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black),
+          actionsIconTheme: IconThemeData(
+              color: Colors.black,
+              size: 35
+          ),
+        ),
+        cardTheme: CardTheme(
+          color: Colors.white,
+          elevation: 6,
+          surfaceTintColor: Colors.orange
+        )
       ),
       home: const MainPage(),
     );
