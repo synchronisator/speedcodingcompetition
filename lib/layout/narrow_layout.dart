@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:speedcodingcompetition/data/competition.dart';
 import 'package:speedcodingcompetition/dialogs/all_competitions_dialog.dart';
 import 'package:speedcodingcompetition/dialogs/all_rules_dialog.dart';
 import 'package:speedcodingcompetition/dialogs/new_rule_dialog.dart';
@@ -15,7 +16,8 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 class NarrowLayout extends StatelessWidget {
   const NarrowLayout({Key? key}) : super(key: key);
 
-  showCompetitionsDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showCompetitionsDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -23,7 +25,8 @@ class NarrowLayout extends StatelessWidget {
         });
   }
 
-  showAllRulesDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showAllRulesDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -31,7 +34,8 @@ class NarrowLayout extends StatelessWidget {
         });
   }
 
-  showNewRuleDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showNewRuleDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -45,7 +49,8 @@ class NarrowLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const FittedBox(fit: BoxFit.fill , child: Text('Speedcoding\nCompetition')),
+        title: const FittedBox(
+            fit: BoxFit.fill, child: Text('Speedcoding\nCompetition')),
         actions: [
           if (context.select((LoginProvider l) => !l.isLoggedIn)) ...[
             const IconButton(
@@ -76,11 +81,34 @@ class NarrowLayout extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const Drawer(
-        child: SafeArea(child: Text("Menu")),
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextButton(
+                  onPressed: () => showAllRulesDialog(context),
+                  child: const Text("Rules")),
+              TextButton(
+                  onPressed: () => showCompetitionsDialog(context),
+                  child: const Text("Competitions")),
+            ],
+          ),
+        ),
       ),
-      endDrawer: const Drawer(
-        child: SafeArea(child: Text("Running Competitions")),
+      endDrawer: Drawer(
+        child: SafeArea(child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: context.watch<DataProvider>().competition.length,
+          separatorBuilder:  (context, index) => const Divider(),
+          itemBuilder: (context, index) {
+            Competition c = context.read<DataProvider>().competition[index];
+            return ListTile(
+              title: Text(c.text),
+              subtitle: Text("${UIConst.formatDate.format(c.startTime)} -> ${UIConst.formatDate.format(c.deadline)}"),
+            );
+          },
+        )),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -103,28 +131,28 @@ class NarrowLayout extends StatelessWidget {
                       buildSizedBox(),
                       Center(
                           child: Column(
-                            children: [
-                              RichText(
-                                  softWrap: true,
-                                  text: TextSpan(
-                                      text:
+                        children: [
+                          RichText(
+                              softWrap: true,
+                              text: TextSpan(
+                                  text:
                                       "Choose 5 or more rules out of ${context.watch<DataProvider>().rules.length}.",
-                                      style: UIConst.defaultTextStyle)),
-                              const SizedBox(height: 15),
-                              ElevatedButton(
-                                  onPressed: () => showAllRulesDialog(context),
-                                  child: const SizedBox(
-                                      width: 150,
-                                      child: Center(child: Text("See all rules")))),
-                              const SizedBox(height: 15),
-                              ElevatedButton(
-                                  onPressed: () => showNewRuleDialog(context),
-                                  child: const SizedBox(
-                                      width: 150,
-                                      child: Center(
-                                          child: Text("Suggest a new rule")))),
-                            ],
-                          )),
+                                  style: UIConst.defaultTextStyle)),
+                          const SizedBox(height: 15),
+                          ElevatedButton(
+                              onPressed: () => showAllRulesDialog(context),
+                              child: const SizedBox(
+                                  width: 150,
+                                  child: Center(child: Text("See all rules")))),
+                          const SizedBox(height: 15),
+                          ElevatedButton(
+                              onPressed: () => showNewRuleDialog(context),
+                              child: const SizedBox(
+                                  width: 150,
+                                  child: Center(
+                                      child: Text("Suggest a new rule")))),
+                        ],
+                      )),
                       buildSizedBox(),
                       RuleList(),
                       buildSizedBox(),
@@ -136,7 +164,7 @@ class NarrowLayout extends StatelessWidget {
                       const CatcherText(
                           defaultTextStyle: UIConst.defaultTextStyle,
                           text:
-                          "How far will you go?\nOnly one day? or maybe a month?\n"),
+                              "How far will you go?\nOnly one day? or maybe a month?\n"),
                       TimeWidget(
                           defaultTextStyle: UIConst.defaultTextStyle,
                           formatDate: UIConst.formatDate),
@@ -149,7 +177,7 @@ class NarrowLayout extends StatelessWidget {
                       const CatcherText(
                           defaultTextStyle: UIConst.defaultTextStyle,
                           text:
-                          "Who will be with you?\nInvite all your friends!"),
+                              "Who will be with you?\nInvite all your friends!"),
                       buildSizedBox(),
                       const InviteList(),
                       buildSizedBox(),
@@ -159,9 +187,9 @@ class NarrowLayout extends StatelessWidget {
                               width: 600,
                               child: Center(
                                   child: Text(
-                                    "Start your competition",
-                                    style: TextStyle(fontSize: 35),
-                                  )))),
+                                "Start your competition",
+                                style: TextStyle(fontSize: 35),
+                              )))),
                       buildSizedBox(),
                     ],
                   ),
@@ -174,7 +202,7 @@ class NarrowLayout extends StatelessWidget {
                   child: Text(
                     "Footer",
                     style:
-                    UIConst.defaultTextStyle.copyWith(color: Colors.white),
+                        UIConst.defaultTextStyle.copyWith(color: Colors.white),
                   ),
                 ),
               )

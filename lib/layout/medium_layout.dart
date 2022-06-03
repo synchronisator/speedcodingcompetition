@@ -15,7 +15,8 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 class MediumLayout extends StatelessWidget {
   const MediumLayout({Key? key}) : super(key: key);
 
-  showCompetitionsDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showCompetitionsDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -23,7 +24,8 @@ class MediumLayout extends StatelessWidget {
         });
   }
 
-  showAllRulesDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showAllRulesDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -31,7 +33,8 @@ class MediumLayout extends StatelessWidget {
         });
   }
 
-  showNewRuleDialog(BuildContext context) { //TODO Tripple gemoppelt
+  showNewRuleDialog(BuildContext context) {
+    //TODO Tripple gemoppelt
     showDialog(
         context: context,
         builder: (_) {
@@ -68,8 +71,20 @@ class MediumLayout extends StatelessWidget {
           ),
         ],
       ),
-      drawer: const Drawer(
-        child: SafeArea(child: Text("Drawer")),
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextButton(
+                  onPressed: () => showAllRulesDialog(context),
+                  child: const Text("Rules")),
+              TextButton(
+                  onPressed: () => showCompetitionsDialog(context),
+                  child: const Text("Competitions")),
+            ],
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(

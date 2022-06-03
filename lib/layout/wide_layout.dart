@@ -46,7 +46,7 @@ class WideLayout extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Speedcoding Competition'),
-        leadingWidth: 200, //TODO
+        leadingWidth: 200,
         leading: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -62,7 +62,7 @@ class WideLayout extends StatelessWidget {
           if (context.select((LoginProvider l) => !l.isLoggedIn)) ...[
             IconButton(
               icon: const Icon(Icons.person),
-              onPressed: () => print("here"),
+              onPressed: () => print("here"), //TODO
             ),
             IconButton(
               icon: const Icon(Icons.login),
