@@ -5,7 +5,6 @@ import 'package:speedcodingcompetition/data/competition.dart';
 import 'package:speedcodingcompetition/data/invite.dart';
 import 'package:speedcodingcompetition/data/player.dart';
 import 'package:speedcodingcompetition/data/rule.dart';
-import 'package:speedcodingcompetition/widget/invitelist.dart';
 import 'package:uuid/uuid.dart';
 
 class DataProvider extends ChangeNotifier {
@@ -21,43 +20,49 @@ class DataProvider extends ChangeNotifier {
   final List<Rule> rulesForCompetition = [];
   final List<Invite> invitesForCompetition = [];
 
-  DataProvider(){
+  DataProvider() {
     initFakeData();
     initNewCompetitionData();
   }
 
-  void setVonDate(DateTime? date){
-    if(date != null){
+  void setVonDate(DateTime? date) {
+    if (date != null) {
       vonDate = date;
       notifyListeners();
     }
   }
 
-  void setBisDate(DateTime? date){
-    if(date != null){
+  void setBisDate(DateTime? date) {
+    if (date != null) {
       bisDate = date;
       notifyListeners();
     }
   }
 
-  void addRule() {
-    if(rules.length == rulesForCompetition.length) return;
+  void addRule(String text, String description) {
+    rules.add(
+        Rule(const Uuid().v4(), text, description: description)); //TODO Backend
+    notifyListeners();
+  }
+
+  void addRuleToCompetition() {
+    if (rules.length == rulesForCompetition.length) return;
     Rule r = rules[rng.nextInt(rules.length)];
     if (!rulesForCompetition.contains(r)) {
-        rulesForCompetition.add(r);
-        notifyListeners();
+      rulesForCompetition.add(r);
+      notifyListeners();
     } else {
-      addRule();
+      addRuleToCompetition();
     }
   }
 
   void changeRule(int index) {
-    if(rules.length == rulesForCompetition.length) return;
+    if (rules.length == rulesForCompetition.length) return;
     Rule r = rules[rng.nextInt(rules.length)];
     if (!rulesForCompetition.contains(r)) {
-        rulesForCompetition.removeAt(index);
-        rulesForCompetition.insert(index, r);
-        notifyListeners();
+      rulesForCompetition.removeAt(index);
+      rulesForCompetition.insert(index, r);
+      notifyListeners();
     } else {
       changeRule(index);
     }
@@ -68,10 +73,26 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void startCompetition(String text) {
+    //TODO Player ist hier falsch zusammengebaut.
+    competition.add(Competition(
+        const Uuid().v4(),
+        text,
+        rulesForCompetition,
+        invitesForCompetition
+            .map((e) => Player(e.uuid, e.name, e.mail, []))
+            .toList(),
+        {},
+        vonDate,
+        bisDate));
+    initNewCompetitionData();
+    notifyListeners();
+  }
+
   void initNewCompetitionData() {
-    while(rulesForCompetition.length < 5){
+    while (rulesForCompetition.length < 5) {
       Rule r = rules[rng.nextInt(rules.length)];
-      if(!rulesForCompetition.contains(r)){
+      if (!rulesForCompetition.contains(r)) {
         rulesForCompetition.add(r);
       }
     }
@@ -79,19 +100,25 @@ class DataProvider extends ChangeNotifier {
 
   void initFakeData() {
     Uuid uuid = const Uuid();
-    rules.add(Rule(uuid.v4(), "Test Coverage von 80 %", description: "Lerne Tests zu schreiben"));
+    rules.add(Rule(uuid.v4(), "Test Coverage von 80 %",
+        description: "Lerne Tests zu schreiben"));
     rules.add(Rule(uuid.v4(), "Theme switcher", description: ""));
     rules.add(Rule(uuid.v4(), "Maximal 4 Farben", description: ""));
     rules.add(Rule(uuid.v4(), "Mindestens zweisprachig", description: ""));
-    rules.add(Rule(uuid.v4(), "Keine build mit mehr als 4 Widgets", description: ""));
-    rules.add(Rule(uuid.v4(), "just one page", description: "One Widget no methods (nur override)"));
+    rules.add(
+        Rule(uuid.v4(), "Keine build mit mehr als 4 Widgets", description: ""));
+    rules.add(Rule(uuid.v4(), "just one page",
+        description: "One Widget no methods (nur override)"));
     rules.add(Rule(uuid.v4(), "Stateless only", description: ""));
     rules.add(Rule(uuid.v4(), "CustomPaint transition", description: ""));
     rules.add(Rule(uuid.v4(), "No column", description: ""));
     rules.add(Rule(uuid.v4(), "No row", description: ""));
-    rules.add(Rule(uuid.v4(), "no packages", description: "no more packages than 'flutter create' adds"));
-    rules.add(Rule(uuid.v4(), "Animationen mit mind 5 teilschritten", description: ""));
-    rules.add(Rule(uuid.v4(), "Stinger-Transition zwischen den pages", description: ""));
+    rules.add(Rule(uuid.v4(), "no packages",
+        description: "no more packages than 'flutter create' adds"));
+    rules.add(Rule(uuid.v4(), "Animationen mit mind 5 teilschritten",
+        description: ""));
+    rules.add(Rule(uuid.v4(), "Stinger-Transition zwischen den pages",
+        description: ""));
     rules.add(Rule(uuid.v4(), "Supabaseanbindung", description: ""));
     rules.add(Rule(uuid.v4(), "Virtuellen würfel", description: ""));
     rules.add(Rule(uuid.v4(), "Notification", description: ""));
@@ -112,7 +139,13 @@ class DataProvider extends ChangeNotifier {
     player.add(Player(uuid.v4(), "Theresa", "die Barmherzige", []));
     player.add(Player(uuid.v4(), "Synchron", "der Bekloppte", []));
 
-    competition.add(Competition(uuid.v4(), rules.where((element) => !element.text.contains("i")).toList(), [] , {} , DateTime.now(), DateTime.now().add(const Duration(days: 2))));
-
+    competition.add(Competition(
+        uuid.v4(),
+        "Best competition ever!",
+        rules.where((element) => !element.text.contains("i")).toList(),
+        [],
+        {},
+        DateTime.now(),
+        DateTime.now().add(const Duration(days: 2))));
   }
 }

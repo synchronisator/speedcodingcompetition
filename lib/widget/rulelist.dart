@@ -17,7 +17,7 @@ class RuleList extends StatelessWidget {
           return context.read<DataProvider>().rulesForCompetition.length == context.read<DataProvider>().rules.length
            ? const SizedBox.shrink()
            : Center(
-              child: IconButton(icon: Icon(Icons.add), onPressed: context.read<DataProvider>().addRule));
+              child: IconButton(icon: Icon(Icons.add), onPressed: context.read<DataProvider>().addRuleToCompetition));
         }
         Rule r = context.read<DataProvider>().rulesForCompetition[index];
         return Card(

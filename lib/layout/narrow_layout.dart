@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:speedcodingcompetition/dialogs/all_competitions_dialog.dart';
+import 'package:speedcodingcompetition/dialogs/all_rules_dialog.dart';
+import 'package:speedcodingcompetition/dialogs/new_rule_dialog.dart';
 import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 import 'package:speedcodingcompetition/provider/loginprovider.dart';
@@ -12,11 +15,29 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 class NarrowLayout extends StatelessWidget {
   const NarrowLayout({Key? key}) : super(key: key);
 
-  showCompetitionsDialog(BuildContext context) {}
+  showCompetitionsDialog(BuildContext context) { //TODO Tripple gemoppelt
+    showDialog(
+        context: context,
+        builder: (_) {
+          return const AllCompetitionsDialog();
+        });
+  }
 
-  showAllRulesDialog(BuildContext context) {}
+  showAllRulesDialog(BuildContext context) { //TODO Tripple gemoppelt
+    showDialog(
+        context: context,
+        builder: (_) {
+          return const AllRulesDialog();
+        });
+  }
 
-  showNewRuleDialog(BuildContext context) {}
+  showNewRuleDialog(BuildContext context) { //TODO Tripple gemoppelt
+    showDialog(
+        context: context,
+        builder: (_) {
+          return const NewRuleDialog();
+        });
+  }
 
   SizedBox buildSizedBox() => const SizedBox(height: 30);
 

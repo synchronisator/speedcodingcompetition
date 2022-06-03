@@ -17,12 +17,25 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  static Map<int, Color> color = {
+    50: const Color.fromRGBO(7, 15, 36, .1),
+    100: const Color.fromRGBO(7, 15, 36, .2),
+    200: const Color.fromRGBO(7, 15, 36, .3),
+    300: const Color.fromRGBO(7, 15, 36, .4),
+    400: const Color.fromRGBO(7, 15, 36, .5),
+    500: const Color.fromRGBO(7, 15, 36, .6),
+    600: const Color.fromRGBO(7, 15, 36, .7),
+    700: const Color.fromRGBO(7, 15, 36, .8),
+    800: const Color.fromRGBO(7, 15, 36, .9),
+    900: const Color.fromRGBO(7, 15, 36, 1.0),
+  };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Speedcoding Competition',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: MaterialColor(0xFF070F24, color),
         scaffoldBackgroundColor: Colors.black12,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
@@ -36,7 +49,10 @@ class MyApp extends StatelessWidget {
               size: 35
           ),
         ),
-        cardTheme: CardTheme(
+        dialogTheme: const DialogTheme(
+          backgroundColor: Color(0xFF373737),
+        ),
+        cardTheme: const CardTheme(
           color: Colors.white,
           elevation: 6,
           surfaceTintColor: Colors.orange
