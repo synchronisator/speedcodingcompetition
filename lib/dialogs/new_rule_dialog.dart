@@ -69,7 +69,9 @@ class _NewRuleDialogState extends State<NewRuleDialog> {
         ElevatedButton(
             child: const Text("Send"),
             onPressed: () {
-              context.read<DataProvider>().addRule(textEditingControllerTitle.text, textEditingControllerText.text);
+              context.read<DataProvider>().addRule(
+                  textEditingControllerTitle.text,
+                  textEditingControllerText.text);
               Navigator.pop(context);
             }),
         const VerticalDivider(),

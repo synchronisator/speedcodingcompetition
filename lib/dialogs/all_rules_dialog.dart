@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
-import 'package:speedcodingcompetition/widget/rulelist.dart';
 
 class AllRulesDialog extends StatefulWidget {
   const AllRulesDialog({Key? key}) : super(key: key);
@@ -12,8 +11,6 @@ class AllRulesDialog extends StatefulWidget {
 }
 
 class _AllRulesDialogState extends State<AllRulesDialog> {
-
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -26,20 +23,19 @@ class _AllRulesDialogState extends State<AllRulesDialog> {
         child: Card(
           elevation: 3,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: context.watch<DataProvider>().rules.length,
-              separatorBuilder:  (context, index) => const Divider(),
-              itemBuilder: (context, index) {
-                Rule r = context.read<DataProvider>().rules[index];
-                return ListTile(
-                  title: Text(r.text),
-                  subtitle: Text(r.description),
-                );
-              },
-            )
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: context.watch<DataProvider>().rules.length,
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, index) {
+                  Rule r = context.read<DataProvider>().rules[index];
+                  return ListTile(
+                    title: Text(r.text),
+                    subtitle: Text(r.description),
+                  );
+                },
+              )),
         ),
       ),
       actions: <Widget>[

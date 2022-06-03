@@ -14,11 +14,11 @@ class CatcherText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-          children: [
-            RichText(
-                softWrap: true,
-                text: TextSpan(text: text, style: defaultTextStyle)),
-          ],
-        ));
+      children: [
+        RichText(
+            softWrap: true,
+            text: TextSpan(text: text, style: defaultTextStyle)),
+      ],
+    ));
   }
 }

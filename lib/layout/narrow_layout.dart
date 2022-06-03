@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedcodingcompetition/data/competition.dart';
-import 'package:speedcodingcompetition/dialogs/all_competitions_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/all_rules_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/new_rule_dialog.dart';
 import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 import 'package:speedcodingcompetition/provider/loginprovider.dart';
@@ -15,33 +12,6 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 
 class NarrowLayout extends StatelessWidget {
   const NarrowLayout({Key? key}) : super(key: key);
-
-  showCompetitionsDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllCompetitionsDialog();
-        });
-  }
-
-  showAllRulesDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllRulesDialog();
-        });
-  }
-
-  showNewRuleDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const NewRuleDialog();
-        });
-  }
 
   SizedBox buildSizedBox() => const SizedBox(height: 30);
 
@@ -87,25 +57,27 @@ class NarrowLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                  onPressed: () => showAllRulesDialog(context),
+                  onPressed: () => UIConst.showAllRulesDialog(context),
                   child: const Text("Rules")),
               TextButton(
-                  onPressed: () => showCompetitionsDialog(context),
+                  onPressed: () => UIConst.showCompetitionsDialog(context),
                   child: const Text("Competitions")),
             ],
           ),
         ),
       ),
       endDrawer: Drawer(
-        child: SafeArea(child: ListView.separated(
+        child: SafeArea(
+            child: ListView.separated(
           shrinkWrap: true,
           itemCount: context.watch<DataProvider>().competition.length,
-          separatorBuilder:  (context, index) => const Divider(),
+          separatorBuilder: (context, index) => const Divider(),
           itemBuilder: (context, index) {
             Competition c = context.read<DataProvider>().competition[index];
             return ListTile(
               title: Text(c.text),
-              subtitle: Text("${UIConst.formatDate.format(c.startTime)} -> ${UIConst.formatDate.format(c.deadline)}"),
+              subtitle: Text(
+                  "${UIConst.formatDate.format(c.startTime)} -> ${UIConst.formatDate.format(c.deadline)}"),
             );
           },
         )),
@@ -140,13 +112,15 @@ class NarrowLayout extends StatelessWidget {
                                   style: UIConst.defaultTextStyle)),
                           const SizedBox(height: 15),
                           ElevatedButton(
-                              onPressed: () => showAllRulesDialog(context),
+                              onPressed: () =>
+                                  UIConst.showAllRulesDialog(context),
                               child: const SizedBox(
                                   width: 150,
                                   child: Center(child: Text("See all rules")))),
                           const SizedBox(height: 15),
                           ElevatedButton(
-                              onPressed: () => showNewRuleDialog(context),
+                              onPressed: () =>
+                                  UIConst.showNewRuleDialog(context),
                               child: const SizedBox(
                                   width: 150,
                                   child: Center(
@@ -182,7 +156,8 @@ class NarrowLayout extends StatelessWidget {
                       const InviteList(),
                       buildSizedBox(),
                       ElevatedButton(
-                          onPressed: () => showNewRuleDialog(context),
+                          onPressed: () =>
+                              UIConst.showStartCompetitionDialog(context),
                           child: const SizedBox(
                               width: 600,
                               child: Center(

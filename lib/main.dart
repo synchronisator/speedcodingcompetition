@@ -10,8 +10,7 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (BuildContext context) => LoginProvider()),
     ChangeNotifierProvider(create: (BuildContext context) => DataProvider()),
-      ],
-      child: const MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,29 +34,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Speedcoding Competition',
       theme: ThemeData(
-        primarySwatch: MaterialColor(0xFF070F24, color),
-        scaffoldBackgroundColor: Colors.black12,
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 2,
-          iconTheme: IconThemeData(color: Colors.black),
-          titleTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black, fontSize: 30,  fontFamily: ""),
-          toolbarTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black),
-          actionsIconTheme: IconThemeData(
-              color: Colors.black,
-              size: 35
+          primarySwatch: MaterialColor(0xFF070F24, color),
+          scaffoldBackgroundColor: Colors.black12,
+          appBarTheme: const AppBarTheme(
+            centerTitle: true,
+            backgroundColor: Colors.white,
+            elevation: 2,
+            iconTheme: IconThemeData(color: Colors.black),
+            titleTextStyle: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                color: Colors.black,
+                fontSize: 30,
+                fontFamily: ""),
+            toolbarTextStyle:
+                TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black),
+            actionsIconTheme: IconThemeData(color: Colors.black, size: 35),
           ),
-        ),
-        dialogTheme: const DialogTheme(
-          backgroundColor: Color(0xFF373737),
-        ),
-        cardTheme: const CardTheme(
-          color: Colors.white,
-          elevation: 6,
-          surfaceTintColor: Colors.orange
-        )
-      ),
+          dialogTheme: const DialogTheme(
+            backgroundColor: Color(0xFF373737),
+          ),
+          cardTheme: const CardTheme(
+              color: Colors.white,
+              elevation: 6,
+              surfaceTintColor: Colors.orange)),
       home: const MainPage(),
     );
   }

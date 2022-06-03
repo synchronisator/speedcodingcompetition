@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:speedcodingcompetition/dialogs/all_competitions_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/all_rules_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/new_rule_dialog.dart';
 import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 import 'package:speedcodingcompetition/provider/loginprovider.dart';
@@ -14,30 +11,6 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 
 class WideLayout extends StatelessWidget {
   const WideLayout({Key? key}) : super(key: key);
-
-  showCompetitionsDialog(BuildContext context) { //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllCompetitionsDialog();
-        });
-  }
-
-  showAllRulesDialog(BuildContext context) {  //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllRulesDialog();
-        });
-  }
-
-  showNewRuleDialog(BuildContext context) { //TODO Tripple gemoppelt
-    showDialog(
-      context: context,
-      builder: (_) {
-        return const NewRuleDialog();
-      });
-  }
 
   SizedBox buildSizedBox() => const SizedBox(height: 50);
 
@@ -51,10 +24,10 @@ class WideLayout extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
-                onPressed: () => showAllRulesDialog(context),
+                onPressed: () => UIConst.showAllRulesDialog(context),
                 child: const Text("Rules")),
             TextButton(
-                onPressed: () => showCompetitionsDialog(context),
+                onPressed: () => UIConst.showCompetitionsDialog(context),
                 child: const Text("Competitions")),
           ],
         ),
@@ -116,7 +89,7 @@ class WideLayout extends StatelessWidget {
                                     const SizedBox(height: 15),
                                     ElevatedButton(
                                         onPressed: () =>
-                                            showAllRulesDialog(context),
+                                            UIConst.showAllRulesDialog(context),
                                         child: const SizedBox(
                                             width: 150,
                                             child: Center(
@@ -124,7 +97,7 @@ class WideLayout extends StatelessWidget {
                                     const SizedBox(height: 15),
                                     ElevatedButton(
                                         onPressed: () =>
-                                            showNewRuleDialog(context),
+                                            UIConst.showNewRuleDialog(context),
                                         child: const SizedBox(
                                             width: 150,
                                             child: Center(
@@ -183,7 +156,8 @@ class WideLayout extends StatelessWidget {
                       ),
                       const SizedBox(height: 50),
                       ElevatedButton(
-                          onPressed: () => showNewRuleDialog(context),
+                          onPressed: () =>
+                              UIConst.showStartCompetitionDialog(context),
                           child: const SizedBox(
                               width: 600,
                               child: Center(

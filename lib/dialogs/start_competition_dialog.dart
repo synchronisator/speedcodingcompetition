@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
-import 'package:speedcodingcompetition/widget/rulelist.dart';
 
 class StartCompetitionDialog extends StatefulWidget {
   const StartCompetitionDialog({Key? key}) : super(key: key);
@@ -12,8 +10,6 @@ class StartCompetitionDialog extends StatefulWidget {
 }
 
 class _StartCompetitionDialogState extends State<StartCompetitionDialog> {
-
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -26,16 +22,18 @@ class _StartCompetitionDialogState extends State<StartCompetitionDialog> {
         child: const Card(
           elevation: 3,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Start!") //TODO Display settings,  texteingabe
-          ),
+              padding: EdgeInsets.all(8.0),
+              child: Text("Start!") //TODO Display settings,  texteingabe
+              ),
         ),
       ),
       actions: <Widget>[
         ElevatedButton(
             child: const Text("Start"),
             onPressed: () {
-              context.read<DataProvider>().startCompetition("Beispieltext"); //TODO
+              context
+                  .read<DataProvider>()
+                  .startCompetition("Beispieltext"); //TODO
               Navigator.pop(context);
             }),
         ElevatedButton(

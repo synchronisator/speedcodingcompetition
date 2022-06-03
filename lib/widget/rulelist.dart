@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 
 class RuleList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -14,10 +11,14 @@ class RuleList extends StatelessWidget {
       itemCount: context.watch<DataProvider>().rulesForCompetition.length + 1,
       itemBuilder: (context, index) {
         if (index == context.read<DataProvider>().rulesForCompetition.length) {
-          return context.read<DataProvider>().rulesForCompetition.length == context.read<DataProvider>().rules.length
-           ? const SizedBox.shrink()
-           : Center(
-              child: IconButton(icon: Icon(Icons.add), onPressed: context.read<DataProvider>().addRuleToCompetition));
+          return context.read<DataProvider>().rulesForCompetition.length ==
+                  context.read<DataProvider>().rules.length
+              ? const SizedBox.shrink()
+              : Center(
+                  child: IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed:
+                          context.read<DataProvider>().addRuleToCompetition));
         }
         Rule r = context.read<DataProvider>().rulesForCompetition[index];
         return Card(
@@ -25,12 +26,12 @@ class RuleList extends StatelessWidget {
             title: Text(r.text),
             subtitle: Text(r.description),
             trailing: IconButton(
-              onPressed: () => context.read<DataProvider>().changeRule(index), icon: Icon(Icons.refresh),
+              onPressed: () => context.read<DataProvider>().changeRule(index),
+              icon: Icon(Icons.refresh),
             ),
           ),
         );
       },
     );
   }
-
 }

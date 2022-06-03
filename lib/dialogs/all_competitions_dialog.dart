@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:speedcodingcompetition/data/competition.dart';
-import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
-import 'package:speedcodingcompetition/widget/rulelist.dart';
 
 class AllCompetitionsDialog extends StatefulWidget {
   const AllCompetitionsDialog({Key? key}) : super(key: key);
@@ -14,8 +12,6 @@ class AllCompetitionsDialog extends StatefulWidget {
 }
 
 class _AllCompetitionsDialogState extends State<AllCompetitionsDialog> {
-
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -28,20 +24,21 @@ class _AllCompetitionsDialogState extends State<AllCompetitionsDialog> {
         child: Card(
           elevation: 3,
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: context.watch<DataProvider>().competition.length,
-              separatorBuilder:  (context, index) => const Divider(),
-              itemBuilder: (context, index) {
-                Competition c = context.read<DataProvider>().competition[index];
-                return ListTile(
-                  title: Text(c.text),
-                  subtitle: Text("${UIConst.formatDate.format(c.startTime)} -> ${UIConst.formatDate.format(c.deadline)}"),
-                );
-              },
-            )
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount: context.watch<DataProvider>().competition.length,
+                separatorBuilder: (context, index) => const Divider(),
+                itemBuilder: (context, index) {
+                  Competition c =
+                      context.read<DataProvider>().competition[index];
+                  return ListTile(
+                    title: Text(c.text),
+                    subtitle: Text(
+                        "${UIConst.formatDate.format(c.startTime)} -> ${UIConst.formatDate.format(c.deadline)}"),
+                  );
+                },
+              )),
         ),
       ),
       actions: <Widget>[

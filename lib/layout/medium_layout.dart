@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:speedcodingcompetition/dialogs/all_competitions_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/all_rules_dialog.dart';
-import 'package:speedcodingcompetition/dialogs/new_rule_dialog.dart';
 import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 import 'package:speedcodingcompetition/provider/loginprovider.dart';
@@ -14,33 +11,6 @@ import 'package:speedcodingcompetition/widget/timewidget.dart';
 
 class MediumLayout extends StatelessWidget {
   const MediumLayout({Key? key}) : super(key: key);
-
-  showCompetitionsDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllCompetitionsDialog();
-        });
-  }
-
-  showAllRulesDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const AllRulesDialog();
-        });
-  }
-
-  showNewRuleDialog(BuildContext context) {
-    //TODO Tripple gemoppelt
-    showDialog(
-        context: context,
-        builder: (_) {
-          return const NewRuleDialog();
-        });
-  }
 
   SizedBox buildSizedBox() => const SizedBox(height: 30);
 
@@ -77,10 +47,10 @@ class MediumLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               TextButton(
-                  onPressed: () => showAllRulesDialog(context),
+                  onPressed: () => UIConst.showAllRulesDialog(context),
                   child: const Text("Rules")),
               TextButton(
-                  onPressed: () => showCompetitionsDialog(context),
+                  onPressed: () => UIConst.showCompetitionsDialog(context),
                   child: const Text("Competitions")),
             ],
           ),
@@ -116,13 +86,15 @@ class MediumLayout extends StatelessWidget {
                                   style: UIConst.defaultTextStyle)),
                           const SizedBox(height: 15),
                           ElevatedButton(
-                              onPressed: () => showAllRulesDialog(context),
+                              onPressed: () =>
+                                  UIConst.showAllRulesDialog(context),
                               child: const SizedBox(
                                   width: 150,
                                   child: Center(child: Text("See all rules")))),
                           const SizedBox(height: 15),
                           ElevatedButton(
-                              onPressed: () => showNewRuleDialog(context),
+                              onPressed: () =>
+                                  UIConst.showNewRuleDialog(context),
                               child: const SizedBox(
                                   width: 150,
                                   child: Center(
@@ -158,7 +130,7 @@ class MediumLayout extends StatelessWidget {
                       const InviteList(),
                       buildSizedBox(),
                       ElevatedButton(
-                          onPressed: () => showNewRuleDialog(context),
+                          onPressed: () => UIConst.showNewRuleDialog(context),
                           child: const SizedBox(
                               width: 600,
                               child: Center(
