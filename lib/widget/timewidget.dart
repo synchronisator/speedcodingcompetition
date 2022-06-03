@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:speedcodingcompetition/layout/ui_constants.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 
 class TimeWidget extends StatelessWidget {
   const TimeWidget({
     Key? key,
-    required this.defaultTextStyle,
-    required this.formatDate,
   }) : super(key: key);
-
-  final TextStyle defaultTextStyle;
-  final DateFormat formatDate;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Start", style: defaultTextStyle),
+        const Text("Start", style: UIConst.defaultTextStyle),
         TextButton(
             onPressed: () => showDatePicker(
                   context: context,
@@ -32,11 +27,12 @@ class TimeWidget extends StatelessWidget {
                             hours: val?.hour ?? 0,
                             minutes: val?.minute ?? 0))))),
             child: Text(
-                formatDate.format(context.watch<DataProvider>().vonDate),
-                style: defaultTextStyle)),
-        Text(
+                UIConst.formatDate
+                    .format(context.watch<DataProvider>().vonDate),
+                style: UIConst.defaultTextStyle)),
+        const Text(
           "Deadline",
-          style: defaultTextStyle,
+          style: UIConst.defaultTextStyle,
         ),
         TextButton(
             onPressed: () => showDatePicker(
@@ -51,8 +47,9 @@ class TimeWidget extends StatelessWidget {
                             hours: val?.hour ?? 0,
                             minutes: val?.minute ?? 0))))),
             child: Text(
-                formatDate.format(context.watch<DataProvider>().bisDate),
-                style: defaultTextStyle)),
+                UIConst.formatDate
+                    .format(context.watch<DataProvider>().bisDate),
+                style: UIConst.defaultTextStyle)),
       ],
     );
   }

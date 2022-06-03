@@ -74,7 +74,7 @@ class WideLayout extends StatelessWidget {
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
                           children: <Widget>[
-                            Expanded(flex: 1, child: RuleList()),
+                            const Expanded(flex: 1, child: RuleList()),
                             Expanded(
                                 flex: 1,
                                 child: Center(
@@ -115,8 +115,8 @@ class WideLayout extends StatelessWidget {
                       ),
                       buildSizedBox(),
                       Row(
-                        children: <Widget>[
-                          const Expanded(
+                        children: const <Widget>[
+                          Expanded(
                               flex: 1,
                               child: CatcherText(
                                   defaultTextStyle: UIConst.defaultTextStyle,
@@ -124,9 +124,7 @@ class WideLayout extends StatelessWidget {
                                       "How far will you go?\nOnly one day? or maybe a month?\n")),
                           Expanded(
                             flex: 1,
-                            child: TimeWidget(
-                                defaultTextStyle: UIConst.defaultTextStyle,
-                                formatDate: UIConst.formatDate),
+                            child: TimeWidget(),
                           )
                         ],
                       ),

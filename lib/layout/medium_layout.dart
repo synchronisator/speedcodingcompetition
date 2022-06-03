@@ -102,7 +102,7 @@ class MediumLayout extends StatelessWidget {
                         ],
                       )),
                       buildSizedBox(),
-                      RuleList(),
+                      const RuleList(),
                       buildSizedBox(),
                       const Text(
                         "Step 2: Choose Times",
@@ -113,9 +113,7 @@ class MediumLayout extends StatelessWidget {
                           defaultTextStyle: UIConst.defaultTextStyle,
                           text:
                               "How far will you go?\nOnly one day? or maybe a month?\n"),
-                      TimeWidget(
-                          defaultTextStyle: UIConst.defaultTextStyle,
-                          formatDate: UIConst.formatDate),
+                      const TimeWidget(),
                       buildSizedBox(),
                       const Text(
                         "Step 3: Invite Friends",

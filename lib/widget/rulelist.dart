@@ -4,6 +4,8 @@ import 'package:speedcodingcompetition/data/rule.dart';
 import 'package:speedcodingcompetition/provider/dataprovider.dart';
 
 class RuleList extends StatelessWidget {
+  const RuleList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -16,7 +18,7 @@ class RuleList extends StatelessWidget {
               ? const SizedBox.shrink()
               : Center(
                   child: IconButton(
-                      icon: Icon(Icons.add),
+                      icon: const Icon(Icons.add),
                       onPressed:
                           context.read<DataProvider>().addRuleToCompetition));
         }
@@ -27,7 +29,7 @@ class RuleList extends StatelessWidget {
             subtitle: Text(r.description),
             trailing: IconButton(
               onPressed: () => context.read<DataProvider>().changeRule(index),
-              icon: Icon(Icons.refresh),
+              icon: const Icon(Icons.refresh),
             ),
           ),
         );
