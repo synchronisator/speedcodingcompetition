@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:speedcodingcompetition/data/competition.dart';
+import 'package:speedcodingcompetition/data/invite.dart';
 import 'package:speedcodingcompetition/data/player.dart';
 import 'package:speedcodingcompetition/data/rule.dart';
+import 'package:speedcodingcompetition/widget/invitelist.dart';
 import 'package:uuid/uuid.dart';
 
 class DataProvider extends ChangeNotifier {
@@ -17,6 +19,7 @@ class DataProvider extends ChangeNotifier {
   DateTime vonDate = DateTime.now();
   DateTime bisDate = DateTime.now().add(const Duration(days: 30));
   final List<Rule> rulesForCompetition = [];
+  final List<Invite> invitesForCompetition = [];
 
   DataProvider(){
     initFakeData();
@@ -58,6 +61,11 @@ class DataProvider extends ChangeNotifier {
     } else {
       changeRule(index);
     }
+  }
+
+  removeInvite(int index) {
+    invitesForCompetition.removeAt(index);
+    notifyListeners();
   }
 
   void initNewCompetitionData() {
@@ -107,5 +115,4 @@ class DataProvider extends ChangeNotifier {
     competition.add(Competition(uuid.v4(), rules.where((element) => !element.text.contains("i")).toList(), [] , {} , DateTime.now(), DateTime.now().add(const Duration(days: 2))));
 
   }
-
 }

@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
           backgroundColor: Colors.white,
           elevation: 2,
+          iconTheme: IconThemeData(color: Colors.black),
           titleTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black, fontSize: 30,  fontFamily: ""),
           toolbarTextStyle: TextStyle(overflow: TextOverflow.ellipsis, color: Colors.black),
           actionsIconTheme: IconThemeData(
